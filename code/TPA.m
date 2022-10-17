@@ -19,7 +19,7 @@ L_ZnSe=1e-3;%400um
 % Si.OA{i}=Si.OASi{i}(:,4)/Si.OASi{i}(1,4);
 % Si.fit{i}=createFit(z,Si.OA{i})
 % fitcoefficient{i}=coeffvalues(Si.fit{i});
-% q0=fitcoefficient{i}(1);%q0=beta I0 Leff
+% q0=fitcoefficient{i}(1);%q0=beta I0 Leff 美女
 % z0=fitcoefficient{i}(2);  
 % % q0=2*sqrt(1-min(Si.OA{i}));  
 % r=sqrt(z0*1e-3*wvl/pi);    
