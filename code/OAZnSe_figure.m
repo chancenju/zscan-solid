@@ -1,0 +1,206 @@
+
+load ZnSe_beta
+beta=data(:,2);
+en=data(:,1);
+%% 画图
+plot(1240./en,beta,'ok','MarkerFaceColor','k','linewidth',2)
+hold on;
+x=interp(en/2.64,3);
+js=18*(2*x'-1).^(3/2)./(2*x').^5;
+plot(1240./x/2.64,js,'--k','LineWidth',2)
+set(gcf,'Position',[400,100  ,1000,600]);
+set(gca,'FontSize',16,'FontName','Helvetica','Layer','top');
+xlabel('wavelength(nm)');
+ylabel('\beta_{TPA}(cm/GW)');
+ylim([0 1])
+xlim([450,950])
+%% 保存图片
+set(gcf,'Units','inches');
+pos=get(gcf,'Position');
+set(gcf,"PaperPositionMode","auto","PaperUnits","inches","PaperSize",[pos(3),pos(4)])
+print(gcf,'OAZnSe.pdf','-dpdf','-r0')
+close(gcf)
+%%
+% for j=[19]
+%     T3{j}=T2{j}./T{j}
+% 
+% 
+%     subplot(3,1,1)
+%     plot(Z{j},T{j},'o')
+%      hold on;
+%     %开孔fit 得q0,z0
+%     fit=createFit(Z{j},T{j});
+%     fitcoefficient=coeffvalues(fit); 
+%     q0{j}=2*sqrt(2)*(1-min(T{j}));
+%     z0{j}=fitcoefficient(2);%mm
+%     r=sqrt(z0{j}*1e-3*(ZnSe.oadata{j}.wavelength)*1e-9/pi); %m   
+% %     r=300e-6;%束腰半径27微米 from 张
+%     I0=1/(pi*r^2*tau)*1e-6;%焦点处光强J/(m^2s)
+% 
+%     Toa{j}=1-q0{j}/(2*sqrt(2))*(1./(1+Z{j}.^2/z0{j}^2));%拟合曲线 
+%     plot(Z{j},Toa{j})
+%     Leff=L_ZnSe;
+%     set(gca,'FontSize',16,'FontName','Helvetica','Layer','top');
+%     beta(j)=q0{j}/Leff/I0*1e11;%cm/GW
+% 
+% 
+%     subplot(3,1,2)
+%     plot(Z{j},T2{j},'o')
+%     set(gca,'FontSize',16,'FontName','Helvetica','Layer','top');
+% 
+%     subplot(3,1,3)
+%     plot(Z{j},T{j},'o')
+%     p{j}=plot(Z{j},T3{j},'o')
+%     hold on;
+%     set(gca,'FontSize',16,'FontName','Helvetica','Layer','top');
+%     
+%    
+%     Tpv=max(T3{j})-min(T3{j});
+%     fit=CAfit(Z{j}/z0{j},T3{j},Tpv);
+%     fitcoa{j}=coeffvalues(fit)   
+%     S=fitcoa{j}(1);%q0=beta I0 Leff
+%     t=fitcoa{j}(2)
+%     n2=(ZnSe.wvl(j)*1e-9/(2*pi))*(Tpv/(0.406*(1-S)^0.27))/(I0*Leff)*1e13%cm2/Gw
+%     Tmodel=1+(4*(Tpv/(0.406*(1-S)^0.27)).*(Z{j}/z0{j}-t))./((1+(Z{j}/z0{j}-t).^2).*(9+(Z{j}/z0{j}-t).^2))-0.08
+%     plot(Z{j},Tmodel);
+%     
+% set(gcf,'Position',[400,100,600,800]);
+% set(gca,'FontSize',16,'FontName','Helvetica','Layer','top');
+% 
+%         % hold on;
+%     % z=GaAs.CAGaAs{1}(:,1)-125;
+%     % set(gcf,'position',[0 40 600 800])
+%     % 
+%     % GaAs.OA{i}=GaAs.OAGaAs{i}(:,4)/mean(GaAs.OAGaAs{i}(1:20,4));
+%     % GaAs.fit{i}=createFit(z,GaAs.OA{i})
+%     % fitcoefficient{i}=coeffvalues(GaAs.fit{i});
+%     % q0=fitcoefficient{i}(1);%q0=beta I0 Leff
+%     % z0=fitcoefficient{i}(2);
+%     % % q0=2*sqrt(1-min(GaAs.OA{i}));
+%     % r=sqrt(z0*1e-3*str2num(GaAs.wvl{i})*1e-9/pi);    
+%     % % r=27e-6;%束腰半径27微米 from 张
+%     % I0=300/(pi*r^2*tau)*1e-6;%焦点处光强J/(m^2s)
+%     % T_GaAs=1-q0/(2*sqrt(2))*(1./(1+z.^2/z0^2));%拟合曲线
+%     % % Leff=(1-exp(-GaAs.alpha{i}*L_GaAs))/GaAs.alpha{i};%低吸收近似
+% end
+
+% plot(ZnSe.wvl(1:19),beta,'-ok','linewidth',2)
+% b(i)=beta{i}
+% subplot(3,1,1)
+% plot(z,GaAs.OA{i},'b.','linewidth',2);
+% 
+% % plot(z,GaAs.OA{i},'b.',z,T_GaAs,'linewidth',2);
+% % beta=(1-0.17)*2*sqrt(2)/((40e-6/(3.14*27e-6*27e-6*7e-9))*280e-6)*1e11;
+% 
+% 
+% 
+% % plot(z,Si.OA{i},'linewidth',2)
+% legend('Experiment','Theory','FontSize',10);
+% xlabel('$Z(mm)$','interpreter','latex');
+% ylabel('Normalized T');
+% % text(40,0.9,'Open Aperture','FontSize',16);
+% betatext=['beta=',num2str(beta{i}),'m/W']
+% xlim([-125 125])
+% % text(-120,0.9,betatext,'FontSize',16);
+% set(gca,'FontSize',16,'FontName','Helvetica','Layer','top');
+% hold on;
+% 
+% 
+%%
+% subplot(3,1,2)
+% GaAs.CA{i}=GaAs.CAGaAs{i}(:,4)/mean(GaAs.CAGaAs{i}(1:20,4));
+% plot(z,GaAs.CA{i},'b.','linewidth',2)
+
+% xlabel('wavelength(nm)');
+% ylabel('\beta_{TPA}(cm/GW)');
+% legend([p{1},p{2},p{6},p{12},p{15},p{17},p{19}],"560nm","575nm","675nm","790nm","850nm","900nm","950nm",'location','southeast')
+% hold on;
+% 
+
+%%
+% 
+% subplot(3,1,3)
+% GaAs.COA{i}=GaAs.CAGaAs{i}(:,5)/mean(GaAs.CAGaAs{i}(1:20,5));
+
+% z0=fitcoa{i}(2)v     
+% % DeltaPhi5=0.5;
+% DeltaTpv=-max(GaAs.COA{i})+min(GaAs.COA{i});
+% S=0.25;
+% DeltaPhi2=DeltaTpv/(0.406*(1-S)^0.27);
+% TCOA=1+4*(z/z0)*(DeltaPhi3)./((1+z.^2/z0^2).*(9+z.^2/z0^2))+4*2*(z/z0)*DeltaPhi5./((1+z.^2/z0^2).^2.*(25+z.^2/z0^2));%拟合曲线
+% TCOA2=1+4*(z/z0)*(DeltaPhi2)./((1+z.^2/z0^2).*(9+z.^2/z0^2));
+% n2{i}=wvl*DeltaPhi3/(2*pi*I0*Leff);%m^2/W
+% n(i)=n2{i};
+% n2p{i}=wvl*DeltaPhi2/(2*pi*I0*Leff);%m^2/W
+% np(i)=n2p{i};
+% n2text=['n2_{3+5}=',num2str(n2{i}),'m^2/W'];
+% n2textp=['n2_3=',num2str(n2p{i}),'m^2/W'];
+% 
+% plot(z,GaAs.COA{i},'b.','linewidth',2)
+% % plot(z,TCOA,'k',z,TCOA2,z,GaAs.COA{i},'b.','linewidth',2)
+% legend('3rd','3rd+5th')
+% xlabel('$Z(mm)$','interpreter','latex');
+% ylabel('Normalized T');
+% % text(60,0.9,'CA/OA','FontSize',16);
+% % text(-120,0.8,n2text,'FontSize',14);
+% % text(-120,0.9,n2textp,'FontSize',14);
+% xlim([-125 125])
+% ylim([0.7 1.4])
+% set(gca,'FontSize',16,'FontName','Helvetica','Layer','top');
+% hold on;
+% title=['Z-scan of Si@',GaAs.wvl{i},'nm'];
+% suptitle(title)
+% end
+% i=3
+% subplot(3,1,1)
+% GaAs.OA{i}=GaAs.OAGaAs{i}(:,4)/max(GaAs.OAGaAs{i}(:,4));
+% plot(z,GaAs.OA{i})
+% subplot(3,1,2)
+% GaAs.CA{i}=GaAs.CAGaAs{i}(:,4)/(GaAs.CAGaAs{i}(1,4));
+% plot(z,GaAs.CA{i})
+% subplot(3,1,3)
+% GaAs.COA{i}=GaAs.CAGaAs{i}(:,5)/(GaAs.CAGaAs{i}(1,5));
+% plot(z,GaAs.COA{i})
+% zscan.i.GaAs=data.GaAs(:,4)/data.GaAs(1,4);%Normalized transmission
+% z=zscan.z;%距离
+% i=zscan.i.Si;%透射率
+
+% L=L_Si;
+% fit=createFit(z,i)
+% %beta I
+% fitcoefficient=coeffvalues(fit);
+% q0=fitcoefficient(1);%q0=beta I0 Leff
+% z0=fitcoefficient(2);  
+% % r=sqrt(z0*1e-3*wvl/pi);
+% r=27e-6;%束腰半径27微米 from 张
+% I0=E0/(pi*r^2*tau);%焦点处光强
+% T_GaAs=1-q0/(2*sqrt(2))*(1./(1+z.^2/z0^2));%拟合曲线
+% Leff=(1-exp(-alpha*L))/alpha;;%低吸收近似
+% beta=q0/Leff/I0*1e11%m/W推到cm/GW
+% plot(z,i,'o',z,T_GaAs,'k','Linewidth',2);
+% % beta=(1-0.17)*2*sqrt(2)/((40e-6/(3.14*27e-6*27e-6*7e-9))*280e-6)*1e11;
+% beta=['$\beta$=',num2str(beta),'cm/GW']; 
+% xlabel('$Z(mm)$','interpreter','latex')
+% ylabel('Normalized T')
+% text(6,0.3,beta,'interpreter','latex','FontSize',16)
+% title('TPA of Silicon')
+% set(gca,'FontSize',16,'FontName','Helvetica','Layer','top');
+% beta={'3.73','2.86','2.44','1.47','0','0'};
+% E0=[4.9,10.2,24.6,50]
+% n2=[1.79,1.22,1.15,0.5]
+% beta2=[3.73,2.86,2.44,1.47]
+%%
+% for i=t
+%     plot(i,length(ZnSe.oadata{1,i}.data(:,1)),'o')
+% hold on;
+% end
+% plot(wavelenth,np,'k-o','MarkerSize',4,'LineWidth',3,'MarkerFaceColor','k')
+% % legend('3rd','3rd+5th')
+% xlabel('Wavelength (nm)');
+% text(40,5,'tau=8ns','FontSize',16)
+% ylabel('n_2(m^2/W)');
+% % ylim([0 6])
+% % ylabel('\beta(m/W)');
+% text(-60,0.9,betatext,'FontSize',16);
+% set(gca,'FontSize',16,'FontName','Helvetica','Layer','top');
+% title('n_2 of InP')

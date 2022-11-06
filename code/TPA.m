@@ -77,17 +77,17 @@ j=0;
 for i=GaP.wvl
     j=j+1;
     GaP.oadata{j}.wavelength=i;
-    GaP.oadata{j}.data=importdata("GaP/"+num2str(i)+"oa.txt").data;
+    GaP.oadata{j}.data=importdata("../data-202206/GaP/"+num2str(i)+"oa.txt").data;
     GaP.cadata{j}.wavelength=i;
-    GaP.cadata{j}.data=importdata("GaP/"+num2str(i)+"ca.txt").data;
+    GaP.cadata{j}.data=importdata("../data-202206/GaP/"+num2str(i)+"ca.txt").data;
 end
 
 %%
 for j=1:4
-    delta{j}=58*2.25;
+    delta(j)=58*2.25;
 end   
 for j=5:7
-    delta{j}=59*2.25;
+    delta(j)=59*2.25;
 end   
 for j=8:10
     delta{j}=56*2.25;
